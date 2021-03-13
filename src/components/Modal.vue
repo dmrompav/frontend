@@ -91,7 +91,7 @@ export default {
 		position relative
 
 // animation
-.modal__appear
+.modal__appear 
 	&-enter
 		opacity 0
 		filter: blur(34px)

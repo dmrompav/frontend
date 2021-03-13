@@ -64,7 +64,7 @@ export default {
 	position absolute
 	z-index 10
 
-.h1
+.h1 
 	font-size 45px
 	@media (min-width 601px)
 		font-size 80px

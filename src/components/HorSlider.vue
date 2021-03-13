@@ -30,7 +30,7 @@
 
 
 // SCRIPTS -------------------------------------------
-<script>
+<script> 
 export default {
 	name: 'HorSlider',
 	props: {

@@ -57,7 +57,7 @@ export default {
 
 
 // STYLES -------------------------------------------
-<style scoped lang="stylus">
+<style scoped lang="stylus"> 
 $size = 60px
 $ml = 60px
 $quantity = 0..7					//how much sliders

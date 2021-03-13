@@ -23,7 +23,7 @@ export default {
 
 
 // STYLES -------------------------------------------
-<style scoped lang="stylus">
+<style scoped lang="stylus"> 
 .slide-count
 	position absolute
 	left 0

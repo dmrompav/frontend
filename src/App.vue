@@ -39,7 +39,7 @@
 
 
 // SCRIPTS -------------------------------------------
-<script>
+<script> 
 import Intro		from './components/Intro.vue'
 import Waves		from './components/Waves.vue'
 import HorSlider	from './components/HorSlider.vue'

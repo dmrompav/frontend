@@ -200,7 +200,7 @@ export default {
 
 
 // STYLES -------------------------------------------
-<style scoped lang="stylus">
+<style scoped lang="stylus"> 
 .waves 
 	position absolute
 	display block
