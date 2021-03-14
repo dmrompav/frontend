@@ -136,15 +136,6 @@ export default {
 			updateTriangles(correction = 0) {
 				this.colorTimer = (this.colorTimer + this.colorSpeed * correction) % 360
 			}
-			// renderParticles(ctx) {
-			// 	ctx.fillStyle = `red`
-			// 	const radius = 5
-			// 	this.particles.forEach(p => {
-			// 		ctx.beginPath()
-			// 		ctx.arc(p.x, p.y, radius, 0, Math.PI * 2)
-			// 		ctx.fill()
-			// 	});
-			// }
 			renderTriangles(ctx) {
 				this.triangles.forEach(t => {
 					const {a, b, c} = t
@@ -153,7 +144,6 @@ export default {
 					const posY = (a.y + b.y + c.y) / 3
 					const dist = Math.hypot(posX, posY)
 					
-					// const hue = dist / this.maxDist * this.colorPalet - this.colorTimer
 					const red = Math.abs(Math.sin((dist / this.maxDist * this.colorPalet - this.colorTimer) * Math.PI / 180)) * 13 + 53
 					const green = Math.abs(Math.sin((dist / this.maxDist * this.colorPalet - this.colorTimer) * Math.PI / 180)) * 111 + 73
 					const blue = Math.abs(Math.sin((dist / this.maxDist * this.colorPalet - this.colorTimer) * Math.PI / 180)) * 37 + 94
@@ -188,7 +178,6 @@ export default {
 			}
 			display() {
 				this.mesh.renderTriangles(this.layer.context)
-				// this.mesh.renderParticles(this.layer.context)
 			}
 		}
 		// ==========================================================
@@ -200,7 +189,7 @@ export default {
 
 
 // STYLES -------------------------------------------
-<style scoped lang="stylus"> 
+<style scoped lang="stylus">
 .waves 
 	position absolute
 	display block

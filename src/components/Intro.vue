@@ -42,21 +42,27 @@ export default {
 
 // STYLES -------------------------------------------
 <style scoped lang="stylus">
+@font-face
+	font-family PO
+	src url('./../assets/fonts/PoiretOne-Regular.woff2') format('woff'), url('./../assets/fonts/PoiretOne-Regular.woff') format('woff')
+
 .intro 
 	z-index 100
 	position absolute
 	width 100vw
-	height 100vh
+	height 100%
 
 	display flex
 	justify-content center
 	align-items center
 
+	font-family PO
+
 .curtain
 	position absolute
 	z-index 5
 	width 100vw
-	height 100vh
+	height 100%
 	background rgba(0, 0, 0, .5)
 	backdrop-filter: blur(8px)
 
@@ -64,9 +70,9 @@ export default {
 	position absolute
 	z-index 10
 
-.h1 
+.h1
 	font-size 45px
-	@media (min-width 601px)
+	@media (min-width 601px) and (min-height: 601px)
 		font-size 80px
 	font-weight 700
 	&__font

@@ -12,7 +12,9 @@
 				.pop-up__header 
 					h3.pop-up__h3 {{ ver[x][y[x]].name }}
 					.pop-up__icons
-				.pop-up__context {{ modal.text[x][y[x]] }}
+				.pop-up__context(
+					v-html="modal.text[x][y[x]]"
+				)
 </template>
 
 
@@ -39,7 +41,7 @@ export default {
 	z-index 60
 	position absolute
 	width 100vw
-	height 100vh
+	height 100%
 	opacity 1
 	filter: blur(0px)
 	backdrop-filter: blur(8px)
@@ -47,7 +49,7 @@ export default {
 .tapfield
 	position absolute
 	width 100vw
-	height 100vh
+	height 100%
 	background rgba(0, 0, 0, .3)
 	cursor pointer
 
@@ -66,6 +68,7 @@ export default {
 	overflow-x hidden
 	overflow-y auto
 	background-color rgba(53, 73, 94, 0.7)
+	user-select text
 
 	&__header
 		max-width 70%
@@ -88,24 +91,19 @@ export default {
 	// &__icons
 
 	&__context
+		// overflow hidden
 		position relative
 
 // animation
-.modal__appear 
-	&-enter
+.modal__appear
+	&-enter,
+	&-leave-to
 		opacity 0
-		filter: blur(34px)
-	&-enter-active
-		transition opacity 0.2s, filter 0.6s ease-out 
+		z-index 10
+	&-enter-active,
+	&-leave-active
+		transition opacity 0.2s
 	&-enter-to,
 	&-leave
 		opacity 1
-		filter: blur(0px)
-	&-leave-active
-		transition opacity 0.6s, filter 0.2s 
-	&-leave-to
-		opacity 0
-		filter: blur(34px)
-		z-index 10
-
 </style>

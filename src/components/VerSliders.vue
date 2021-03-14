@@ -16,24 +16,27 @@
 				)
 					button.ver-btn.clicknull(
 						v-if="ver[key][k].type !== 'link'"
-						@click="$emit('select', key, k, $event)"
 						:class="(k === y[key])? 'ver-btn--selected' : 'ver-btn--selectable'"
 						:style="ver[key][k].type === 'no' ? 'cursor: not-allowed !important' : ''"
+						@click="$emit('select', key, k, $event)"
 					)
-						.ver-btn__icon
+						.ver-btn__icon(
+							:style="`background-position: -${ver[key][k].icon[0] * 60}px -${ver[key][k].icon[1]  * 60}px;`"
+						)
 						.ver-btn__txt
 							h3.ver-btn__name {{ ver[key][k].name }}
 							p.ver-btn__desc {{ ver[key][k].desc }}
-					hr.ver-slider__hr(v-if="key === 1 && k === 1")
 					a.ver-btn.clicknull(
 						v-if="ver[key][k].type === 'link'"
 						target="_blank"
 						:href="ver[key][k].link"
-						@click="$emit('select', key, k, $event)"
 						:class="(k === y[key])? 'ver-btn--selected' : 'ver-btn--selectable'"
 						:style="ver[key][k].type === 'no' ? 'cursor: not-allowed !important' : ''"
+						@click="$emit('select', key, k, $event)"
 					)
-						.ver-btn__icon
+						.ver-btn__icon(
+							:style="`background-position: -${ver[key][k].icon[0] * 60}px -${ver[key][k].icon[1]  * 60}px;`"
+						)
 						.ver-btn__txt
 							h3.ver-btn__name {{ ver[key][k].name }}
 							p.ver-btn__desc {{ ver[key][k].desc }}
@@ -57,7 +60,7 @@ export default {
 
 
 // STYLES -------------------------------------------
-<style scoped lang="stylus"> 
+<style scoped lang="stylus">
 $size = 60px
 $ml = 60px
 $quantity = 0..7					//how much sliders
@@ -81,10 +84,10 @@ $translateY(n)						// !mixin - translate ver-slider_ up-down
 	z-index: 30
 	position absolute
 	transition transform 0.2s
-	@media(min-width: 601px)
+	@media (min-width: 601px) and (min-height: 601px)
 		top 30vh
 		left 30vw
-	@media(max-width: 600px)
+	@media (max-width: 600px),(max-height: 600px)
 		top 70px
 		left 10vw
 
@@ -93,7 +96,7 @@ for one in $quantity
 	
 .ver-slider
 	position absolute
-	@media(min-width: 601px)
+	@media (min-width: 601px) and (min-height: 601px)
 		margin-left $ml
 	display flex
 	flex-direction column
@@ -122,14 +125,26 @@ for one in $quantityY
 	transition margin-top 0.1s
 
 	&__icon
+		position relative
 		width $size
 		height $size
-		border 3px solid #fff
-		border-radius 30%
 		background-color #35495e
+		border-radius 30%
 		margin 10px 20px 30px 0px
-		filter grayscale(60%)
+		@media (min-width: 601px) and (min-height: 601px)
+			filter grayscale(90%)
 		transition transform 0.15s
+		background-image url('./../assets/ps/ver_min.jpg')
+
+		&:after
+			content ''
+			position absolute
+			top 0
+			left 0
+			width $size 
+			height $size
+			border 2px solid #fff
+			border-radius 30%
 
 	&__txt
 		width 400px
@@ -149,25 +164,31 @@ for one in $quantityY
 
 	&--selectable
 		&:hover>.ver-btn__icon
-			transform scale(1.2)
-			filter grayscale(0%)
+			@media (min-width: 601px) and (min-height: 601px)
+				transform scale(1.2)
+				filter grayscale(60%)
 		&:hover>.ver-btn__txt>.ver-btn__name
-			font-size 24px
+			@media (min-width: 601px) and (min-height: 601px)
+				font-size 24px
 		&:hover>.ver-btn__txt>.ver-btn__desc
-			font-size 20px
+			@media (min-width: 601px) and (min-height: 601px)
+				font-size 20px
 
 	&--selected
-		@media(min-width: 601px)
+		@media (min-width: 601px) and (min-height: 601px)
 			margin-top 160px
 		&>.ver-btn__icon
-			transform scale(1.2)
-			filter grayscale(0%)
+			@media (min-width: 601px) and (min-height: 601px)
+				transform scale(1.2)
+				filter grayscale(0%)
 		&>.ver-btn__txt>.ver-btn__name
-			font-size 24px
+			@media (min-width: 601px) and (min-height: 601px)
+				font-size 24px
 		&>.ver-btn__txt>.ver-btn__desc
-			font-size 20px
+			@media (min-width: 601px) and (min-height: 601px)
+				font-size 20px
 
-// Animation
+// Animation -----
 .ver-slider__appear
 	&-enter,
 	&-leave-to
@@ -178,5 +199,4 @@ for one in $quantityY
 	&-enter-to,
 	&-leave
 		opacity 1
-
 </style>

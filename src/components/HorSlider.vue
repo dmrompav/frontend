@@ -22,15 +22,18 @@
 						:class="(key === x)? 'hor-btn--selected' : 'hor-btn--selectable'"
 					)
 						.hor-btn__icon(
-							:style="`background-position: -${hor[key].icon * 84}px;`"
+							v-once
+							:style="`background-position: -${hor[key].icon * 90}px;`"
 						)
-						h2.hor-btn__txt {{ item.name }}
+						h2.hor-btn__txt(
+							v-once
+						) {{ item.name }}
 </template>
 
 
 
 // SCRIPTS -------------------------------------------
-<script> 
+<script>
 export default {
 	name: 'HorSlider',
 	props: {
@@ -51,16 +54,16 @@ $translate(n)					// !mixin - translate hor-slider
 	val = (- n * 180)px
 	valForMobile = (- n * 100)vw
 	.hor-slider--{n}
-		@media(min-width: 601px)
+		@media (min-width: 601px) and (min-height: 601px)
 			transform translate(val)
-		@media(max-width: 600px)
+		@media (max-width: 600px),(max-height: 600px)
 			left valForMobile !important
 
 //Styles ========
 .arrow
-	@media(min-width: 601px)
+	@media (min-width: 601px) and (min-height: 601px)
 		display none
-	@media(max-width: 600px)
+	@media (max-width: 600px),(max-height: 600px)
 		position absolute
 		z-index 50
 		top 0px
@@ -79,15 +82,14 @@ $translate(n)					// !mixin - translate hor-slider
 .hor-slider
 	position absolute
 	width 100vw
-	height 100vh
 
 	&__nav
 		z-index 40
 		position absolute
 		left 30vw
-		@media(min-width: 601px)
+		@media(min-width: 601px) and (min-height: 601px)
 			top 30vh
-		@media(max-width: 600px)
+		@media(max-width: 600px),(max-height: 600px)
 			top 0
 			background rgba(0, 0, 0, 0.6)
 		transition transform 0.2s
@@ -110,29 +112,40 @@ for one in $quantity
 	justify-content flex-start
 	align-items center
 	transition transform 0.15s
-	@media(max-width: 600px)
+	@media(max-width: 600px),(max-height: 600px)
 		width 100vw
 		height 60px
 		justify-content center
 		cursor: default
 
 	&__icon
-		@media(min-width: 601px)
+		@media(min-width: 601px) and (min-height: 601px)
 			width $size
 			height $size
 			background-color #42b883
-			border 3px solid #fff
 			border-radius 30%
 			margin $between
-			filter grayscale(60%)
+			filter grayscale(90%)
 			background-image url('./../assets/ps/hor.jpg')
 			background-size 800%
-		@media(max-width: 600px)
+		@media(max-width: 600px),(max-height: 600px)
 			display none
+
+		&:after
+			@media(min-width: 601px) and (min-height: 601px)
+				content ''
+				position absolute
+				top 0
+				left 0
+				border 2px solid #fff
+				border-radius 30%
+				width $size
+				height $size
+
 
 	&__txt
 		width $size
-		@media(max-width: 600px)
+		@media(max-width: 600px),(max-height: 600px)
 			width auto
 			line-height 60px
 		font-size 22px
@@ -145,7 +158,7 @@ for one in $quantity
 			transform scale(1.2)
 		&:hover>.hor-btn__icon
 			transform scale(1)
-			filter grayscale(0%)
+			filter grayscale(60%)
 		&:hover>.hor-btn__txt
 			transform scale(1)
 	&--selected
