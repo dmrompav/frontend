@@ -21,6 +21,9 @@
 <script>
 export default {
 	name: 'Intro',
+	props: {
+		adminIntro: Object,
+	},
 	data() {
 		return {
 			introStarted: false,

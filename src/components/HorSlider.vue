@@ -91,7 +91,7 @@ $translate(n)					// !mixin - translate hor-slider
 			top 30vh
 		@media(max-width: 600px),(max-height: 600px)
 			top 0
-			background rgba(0, 0, 0, 0.6)
+			background rgba(0, 0, 0, 0.7)
 		transition transform 0.2s
 
 	&__ul

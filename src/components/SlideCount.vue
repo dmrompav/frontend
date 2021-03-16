@@ -4,6 +4,7 @@
 		.point(
 			v-for="i in quantity"
 			:class="(i - 1 === x) ? 'point--selected' : ''"
+			@click="$emit('select', i-1)"
 		)
 </template>
 
@@ -16,6 +17,7 @@ export default {
 	props: {
 		quantity: Number,
 		x: Number,
+		
 	}
 }
 </script>

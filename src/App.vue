@@ -6,6 +6,7 @@
 		Intro(
 			@start-cv="opacityTotal = 1"
 			v-if="opacityTotal === 0"
+			:admin-intro="admin.intro"
 		)
 		Waves(
 			v-if="canvas.exist"
@@ -36,6 +37,7 @@
 				SlideCount(
 					:x="x"
 					:quantity="horLength"
+					@select="horButClick"
 				)
 		address.info FrontendCV LastUpdate: March 11, 2021
 </template>
@@ -85,139 +87,122 @@ export default {
 			},
 			admin: {
 				intro: {
-					h1: 'Frontend CV',
-					caption: 'Made with',
+					caption: 'Дмитрий Павлов',
 				},
 				hor: [
-					{name: 'Info', 			icon: '0'},
-					{name: 'Projects', 		icon: '1'},
-					{name: 'Skills', 		icon: '2'},
-					{name: 'Read books', 	icon: '3'},
-					{name: 'Download CV', 	icon: '4'},
-					{name: 'Rating', 		icon: '5'},
-					{name: 'Contact me', 	icon: '6'},
-					{name: 'Settings', 		icon: '7'},
+					{name: 'Инфо', 					icon: '0'},
+					{name: 'Проекты', 				icon: '1'},
+					{name: 'Навыки', 				icon: '2'},
+					{name: 'Прочитанные книги', 	icon: '3'},
+					{name: 'Резюме', 				icon: '4'},
+					{name: 'Отзывы', 				icon: '5'},
+					{name: 'Свяжитесь со мной', 	icon: '6'},
+					{name: 'Настройки', 			icon: '7'},
 				],
 				ver: [
 					[
-						{name: 'Dmitry Pavlov',			desc: 'Frontend Vue, 24y.o.',			icon: [0,1],		type: 'modal',},
-						{name: 'About this Site',		desc: 'Stack and #src',					icon: [0,2],		type: 'modal',},
+						{name: 'Дмитрий Павлов',		desc: 'Frontend Vue, 24 года.',			icon: [0,1],		type: 'modal',},
+						{name: 'О сайте',				desc: 'Технология и исходный код',		icon: [0,2],		type: 'modal',},
 					],
 					[
-						{name: 'MyGitHub',				desc: '',								icon: [1,0],		type: 'link',		link:'https://github.com/dmrompav',},
-						{name: 'MyCodePen',				desc: '',								icon: [1,1],		type: 'link',		link:'https://codepen.io/dmrompav',},
-						{name: 'VueCRM',				desc: 'in process...',					icon: [1,2],		type: 'modal',},
-						{name: 'JS site-constructor',	desc: 'in process...',					icon: [1,3],		type: 'modal',},
+						{name: 'Мой GitHub',			desc: '',								icon: [1,0],		type: 'link',		link:'https://github.com/dmrompav',},
+						{name: 'Мой CodePen',			desc: '',								icon: [1,1],		type: 'link',		link:'https://codepen.io/dmrompav',},
+						{name: 'Vue анимированное меню',desc: 'Vue, Pug, Stylus, JS',			icon: [3,2],		type: 'link',		link:'https://dmrompav.github.io/roboto_v3/',},
+						{name: '3D интерактивное меню',	desc: 'Gulp, Pug, SASS, JS',			icon: [3,0],		type: 'link',		link:'https://dmrompav.github.io/amata_v2-project/',},
+						{name: 'VueCRM',				desc: 'в процессе...',					icon: [1,2],		type: 'no',},
+						{name: 'JS site-constructor',	desc: 'в процессе...',					icon: [1,3],		type: 'no',},
 					],
 					[
-						{name: 'English',				desc: 'Intermediate',					icon: [2,0],		type: 'modal',},
-						{name: 'HTML',					desc: 'Pug + Semantic',					icon: [2,1],		type: 'modal',},
+						{name: 'Английский',			desc: 'Intermediate',					icon: [2,0],		type: 'modal',},
+						{name: 'HTML',					desc: 'Pug + Семантика',				icon: [2,1],		type: 'modal',},
 						{name: 'CSS',					desc: 'SASS/Stylus',					icon: [2,2],		type: 'modal',},
-						{name: 'Tailwind',				desc: 'learning...',					icon: [2,3],		type: 'no',},
+						{name: 'Tailwind',				desc: 'в процессе...',					icon: [2,3],		type: 'no',},
 						{name: 'JS (ES6+)',				desc: '',								icon: [3,0],		type: 'modal',},
-						{name: 'TypeScript',			desc: 'learning...',					icon: [3,1],		type: 'no',},
+						{name: 'TypeScript',			desc: 'в процессе...',					icon: [3,1],		type: 'no',},
 						{name: 'Vue',					desc: 'Vue-cli, VueX',					icon: [3,2],		type: 'modal',},
-						{name: 'Canvas',				desc: 'Animations',						icon: [0,0],		type: 'modal',},
-						{name: 'DX',					desc: 'git, bundlers, npm, IDE...',		icon: [3,3],		type: 'modal',},
+						{name: 'Canvas',				desc: 'Анимации',						icon: [0,0],		type: 'modal',},
+						{name: 'DX',					desc: 'git, Сборщики, npm, IDE...',		icon: [3,3],		type: 'modal',},
 						{name: 'Soft skills',			desc: '',								icon: [4,2],		type: 'modal'},
 					],
 					[
-						{name: 'Eloquent javascript',	desc: 'Marijin Haverbeke',				icon: [0,3],		type: 'no'},
-						{name: 'Grokking algorithms',	desc: 'Aditia Bhargava',				icon: [0,4],		type: 'no'},
+						{name: 'Выразительный javascript',	desc: 'Марейн Хавербек',			icon: [0,3],		type: 'no'},
+						{name: 'Грокаем алгоритмы',		desc: 'Адитья Бхаргава',				icon: [0,4],		type: 'no'},
 					],
 					[
-						{name: 'Simple',				desc: '',								icon: [4,0],		type: 'link',		link:'https://samara.hh.ru/resume/c6fd48e2ff08b5ed960039ed1f7a3251785048',},
-						{name: 'Creative',				desc: 'in process...',					icon: [4,1],		type: 'no',},
+						{name: 'Стандартное',			desc: '',								icon: [4,0],		type: 'link',		link:'https://samara.hh.ru/resume/c6fd48e2ff08b5ed960039ed1f7a3251785048',},
+						{name: 'Креативное',			desc: 'в процессе...',					icon: [4,1],		type: 'no',},
 					],
 					[
-						{name: 'Mum',					desc: 'My son is a good boy...',		icon: [1,4],		type: 'modal',},
+						{name: 'Мама',					desc: 'Мой сын хороший программист...',	icon: [1,4],		type: 'modal',},
 					],
 					[
-						{name: 'Phone',					desc: '+7(996) 107-88-23',				icon: [4,3],		type: 'link',		link:'tel:+79961078823',},
-						{name: 'Telegram',				desc: 'The most convinient',			icon: [2,4],		type: 'link',		link:'',},
-						{name: 'WhatsApp',				desc: '',								icon: [3,4],		type: 'link',		link:'',},
+						{name: 'Телефон',				desc: '+7(996) 107-88-23',				icon: [4,3],		type: 'link',		link:'tel:+79961078823',},
+						{name: 'Telegram',				desc: 'Предпочитаемый способ',			icon: [2,4],		type: 'link',		link:'https://t.me/dmrompav',},
+						{name: 'WhatsApp',				desc: '',								icon: [3,4],		type: 'link',		link:'https://wa.me/+79961078823',},
 						{name: 'Gmail',					desc: 'dm.rom.pav@gmail.com',			icon: [4,4],		type: 'link',		link:'mailto:dm.rom.pav@gmail.com',},
 					],
 					[
-						{name: 'Language',				desc: 'in process...',					icon: [2,0],		type: 'no'},
+						{name: 'Language',				desc: 'в процессе...',					icon: [2,0],		type: 'modal'},
 						// {name: 'DarkBlue',				desc: 'Color theme',					icon: '',			type: 'script',		other: 'DarkRed',},
-						{name: 'High Perfomace',		desc: 'click to enter this',			icon: [0,0],		type: 'script',		script: this.SCRIPT1,		other: 'High Quality',},
+						{name: 'Повысить производительность', other: 'Повысить качество',		desc: 'кликните для выбора',			icon: [0,0],		type: 'script',		script: this.SCRIPT1,},
 					],
 				],
 				modal: {
 					icons: {
-						1: [[1,1], [1,2], [1,3], [1,4], [1,5], [1,6], [1,7], [1,8],],
-						2: [[2,1], [2,2], [2,3], [2,4], [2,5], [2,6], [2,7], [2,8],],
-						3: [[3,1], [3,2], [3,3], [3,4], [3,5], [3,6], [3,7], [3,8],],
-						4: [[4,1], [4,2], [4,3], [4,4], [4,5], [4,6], [4,7], [4,8],],
-						5: [[5,1], [5,2], [5,3], [5,4], [5,5], [5,6], [5,7], [5,8],],
-						6: [[6,1], [6,2], [6,3], [6,4], [6,5], [6,6], [6,7], [6,8],],
-						7: [[7,1], [7,2], [7,3], [7,4], [7,5], [7,6], [7,7], [7,8],],
-						8: [[8,1], [8,2], [8,3], [8,4], [8,5], [8,6], [8,7], [8,8],],
+						// 1: [[1,1], [1,2], [1,3], [1,4], [1,5], [1,6], [1,7], [1,8],],
+						// 2: [[2,1], [2,2], [2,3], [2,4], [2,5], [2,6], [2,7], [2,8],],
+						// 3: [[3,1], [3,2], [3,3], [3,4], [3,5], [3,6], [3,7], [3,8],],
+						// 4: [[4,1], [4,2], [4,3], [4,4], [4,5], [4,6], [4,7], [4,8],],
+						// 5: [[5,1], [5,2], [5,3], [5,4], [5,5], [5,6], [5,7], [5,8],],
+						// 6: [[6,1], [6,2], [6,3], [6,4], [6,5], [6,6], [6,7], [6,8],],
+						// 7: [[7,1], [7,2], [7,3], [7,4], [7,5], [7,6], [7,7], [7,8],],
+						// 8: [[8,1], [8,2], [8,3], [8,4], [8,5], [8,6], [8,7], [8,8],],
 					},
 					text: {
 						0: [
-							'<p></p>',
-							'<p></p>',
+							'<p>Привет!</p><p>Я начинающий frontend разработчик. Очень люблю кодить и креативить.</p><p>По мере обучения-развития, буду дополнять сайт новыми актуальными данными о навыках и учебных/коммерческих проектах</p><p>В данный момент я нахожусь в поиске интересной работы.</p>',
+							'<p>Данный сайт сделан по подобию PlayStation3 UI (десктопная версия)</p><p>Сайт адаптивный, кроссбраузерный(без IE) и легко-дополняемый новыми блоками и информацией</p><p>Сайт сделан на Vue (Pug, JS, Stylus)</p><p><a href="https://github.com/dmrompav/frontend">-Ссылка на исходники-</a></p>',
 						],
 						1: [
-							'', 
-							'', 
-							'',
-							'', 
+							'-', 
+							'-', 
+							'-',
+							'-', 
+							'-',
+							'-', 
 						],
 						2: [
-							'', 
-							'', 
-							'', 
-							'', 
-							'', 
-							'', 
-							'', 
-							'',
+							'<p>Английский язык не вгоняет меня в ступор. Могу искать информацию в англоязычном сегменте интернета.</p><p>Некоторое время усиленно прокачиваю навык - читаю книги, смотрю сериалы в оригинале, изучаю frontend-английский на "The Odin Project"</p>', 
+							'<p>Сайт в разработке. Информация будет вскоре добавлена</p>', 
+							'<p>Сайт в разработке. Информация будет вскоре добавлена</p>', 
+							'<p>Сайт в разработке. Информация будет вскоре добавлена</p>', 
+							'<p>Сайт в разработке. Информация будет вскоре добавлена</p>', 
+							'<p>Сайт в разработке. Информация будет вскоре добавлена</p>', 
+							'<p>Сайт в разработке. Информация будет вскоре добавлена</p>', 
+							'<p>Сайт в разработке. Информация будет вскоре добавлена</p>',
+							'<p>Сайт в разработке. Информация будет вскоре добавлена</p>',
+							'<p>Сайт в разработке. Информация будет вскоре добавлена</p>',
 						],
 						3: [
-							'', 
-							'', 
-							'', 
-							'', 
-							'', 
-							'', 
-							'', 
-							'',
+							'-', 
+							'-', 
 						],
 						4: [
-							'', 
-							'', 
-							'', 
-							'', 
-							'', 
-							'', 
-							'', 
-							'',
+							'-', 
+							'-', 
 						],
 						5: [
-							'<p>My son is good boy and succesful programmer. He can install windows and fix the printer.</p>', 
+							'<p>Мой сын хороший мальчик и замечательный программист. Он может переустановить Виндовс и починить принтер</p>', 
 						],
 						6: [
-							'', 
-							'', 
-							'', 
-							'', 
-							'', 
-							'', 
-							'', 
-							'',
+							'-', 
+							'-', 
+							'-', 
+							'-', 
 						],
 						7: [
-							'', 
-							'', 
-							'', 
-							'', 
-							'', 
-							'', 
-							'', 
-							'',
+							'<p>This language will be available soon</p><p>English is not a primary language for me. I taught myself how to code in my own language. Now I\'m using "The Odin project" to learn English.</p>', 
+							'-', 
 						],
 					},
 				}
@@ -406,12 +391,4 @@ export default {
 .pop-up__context>p 
 	font-size 20px
 	margin-top 15px
-	animation lazy 0.2s linear
-	@keyframe lazy
-		0% 
-			opacity 0
-			transform translate(-300px)
-		100% 
-			opacity 1
-			transform translate(0px)
 </style>

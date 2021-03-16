@@ -175,6 +175,7 @@ for one in $quantityY
 				font-size 20px
 
 	&--selected
+		background rgba(255,255,255,0.1)
 		@media (min-width: 601px) and (min-height: 601px)
 			margin-top 160px
 		&>.ver-btn__icon
